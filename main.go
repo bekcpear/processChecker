@@ -26,11 +26,11 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	for _, ins := range *instances {
+	for i, _ := range *instances {
 		checker.Job.Mu.Lock()
 		checker.Job.Count++
 		checker.Job.Mu.Unlock()
-		go checker.Do(&ins)
+		go checker.Do(&(*instances)[i])
 	}
 
 	finished := make(chan bool)
